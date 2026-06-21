@@ -12,14 +12,18 @@ COPY . .
 RUN npm run build
 
 # Production Stage
-FROM nginx:stable-alpine
+FROM node:22-alpine
 
-# Copy the built app from the build stage
-COPY --from=build /app/dist /usr/share/nginx/html
+WORKDIR /app
 
-# Copy custom nginx configuration
-COPY nginx.conf /etc/nginx/conf.d/default.conf
+# Install 'serve' package globally to serve the static files
+RUN npm install -g serve
 
-EXPOSE 80
+# Copy built files from build stage
+COPY --from=build /app/dist ./dist
 
-CMD ["nginx", "-g", "daemon off;"]
+# Expose the port serve runs on (default 3000)
+EXPOSE 3000
+
+# Use 'serve' with -s flag for SPA routing support
+CMD ["serve", "-s", "dist", "-l", "3000"]

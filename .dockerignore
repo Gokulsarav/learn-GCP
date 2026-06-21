@@ -1,11 +1,16 @@
+# local node_modules
 node_modules
+# build output
 dist
+# git metadata
 .git
 .gitignore
 .dockerignore
+# documentation
 README.md
+# Docker related
 Dockerfile
-nginx.conf
+# logs
 npm-debug.log
 error.log
 .DS_Store
