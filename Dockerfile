@@ -23,7 +23,7 @@ RUN npm install -g serve
 COPY --from=build /app/dist ./dist
 
 # Expose the port serve runs on (default 3000)
-EXPOSE 3000
+EXPOSE 80
 
 # Use 'serve' with -s flag for SPA routing support
-CMD ["serve", "-s", "dist", "-l", "3000"]
+CMD ["serve", "-s", "dist", "-l", "80"]
